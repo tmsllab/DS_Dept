@@ -47,4 +47,4 @@ sudo dpkg -i mongodb-compass_1.45.2_amd64.deb
 ```
 
 **Click on show application you will find a icon named MongoDB Compass.** <br>
-**Installation process Completed**
+**Installation process Completed...**
