@@ -1,4 +1,4 @@
-## 6th sem big data (MongoDB Installation)
+## 6th sem big data (MongoDB Installation for Ubuntu OS)
 ### 1. **Download all the .deb Packages**:
 * [MongoDB Community](https://repo.mongodb.org/apt/ubuntu/dists/jammy/mongodb-org/8.0/multiverse/binary-amd64/mongodb-org-server_8.0.4_amd64.deb) 
 * [MongoDB Shell](https://downloads.mongodb.com/compass/mongodb-mongosh_2.3.8_amd64.deb)
