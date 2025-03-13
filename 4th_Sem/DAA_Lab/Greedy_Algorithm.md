@@ -1,5 +1,6 @@
 ```C
 /* write a C program to implement Fractional Knapsack problem */
+
 #include <stdio.h>
 #include <stdlib.h>
 #define SIZE 7
@@ -16,7 +17,8 @@ void display(Block arr[]) {
     int i;
     printf("\nNo   Profit \t Weight    Profit/weight\n");
     for (i = 0; i < SIZE; i++) {
-        printf(" %d    %.2f \t %.2f \t\t %.2f\n", arr[i].no, arr[i].profit, arr[i].weight, arr[i].profit_per_kg);
+        printf(" %d    %.2f \t %.2f \t\t %.2f\n", arr[i].no, arr[i].profit,
+                        arr[i].weight, arr[i].profit_per_kg);
     }
 }
 
@@ -51,13 +53,15 @@ int main() {
 
     for (i = 0; i < SIZE; i++) {
         if (avalible >= arr[i].weight) {
-            printf("\nIteration %d: Choose Block %d, take full part here profit per kg= %.2f", i, arr[i].no, arr[i].profit_per_kg);
+            printf("\nIteration %d: Choose Block %d, take full part here profit per kg= %.2f", i,
+                            arr[i].no, arr[i].profit_per_kg);
             total_profit += arr[i].profit;
             avalible -= arr[i].weight;
             printf("\n\t Now profit = %.2f and Remaining Capacity = %.2f", total_profit, avalible);
         }
         else {
-            printf("\nIteration %d: Choose Block %d, take %.2f part here profit per kg= %.2f", i, arr[i].no, avalible / arr[i].weight, arr[i].profit_per_kg);
+            printf("\nIteration %d: Choose Block %d, take %.2f part here profit per kg= %.2f", i, arr[i].no, 
+                        avalible / arr[i].weight, arr[i].profit_per_kg);
             total_profit += avalible * arr[i].profit_per_kg;
             avalible = 0;
             printf("\n\t Now profit = %.2f and Remaining Capacity = %.2f", total_profit, avalible);
