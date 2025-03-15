@@ -27,7 +27,7 @@ int main() {
     Block arr[SIZE_LIMIT], temp;
     int i, j,size;
     float capacity, avalible, total_profit = 0;
-    printf("Enter total number of Blocks(maximum: %d): \n", SIZE_LIMIT);
+    printf("Enter total number of Blocks(maximum: %d): ", SIZE_LIMIT);
     scanf("%d",&size);
     for (i = 0; i < size; i++) {  //taking input data
         arr[i].no = i;
