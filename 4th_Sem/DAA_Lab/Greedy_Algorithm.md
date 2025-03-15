@@ -259,7 +259,7 @@ For Capacity 15.00, Total Profit will be 55.33
 ## Job Scheduling with Deadline Problem method 1
 ```C
 /* write a C program to implement Job Scheduling with Deadline problem using Greedy approach */
-/*Last updated : 15-03-2025*/
+/*Last updated : 16-03-2025*/
 
 #include <stdio.h>
 #include <stdlib.h>
