@@ -1,5 +1,5 @@
 # Greedy Algorithm
-*    ## Fractional Knapsack Problem &emsp; [method 1](#method-1) &emsp; [method 2(recommend)](#method-2)
+*    ## Fractional Knapsack Problem &emsp; [method 1](#method-1) &emsp; [method 2](#method-2)
 
 ### Method 1
 ```C
