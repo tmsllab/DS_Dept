@@ -1,9 +1,10 @@
 ```C
-/* write a C program to implement Fractional Knapsack problem */
+/* write a C program to implement Fractional Knapsack problem using Greedy approach */
+/*Last updated : 15-03-2025*/
 
 #include <stdio.h>
 #include <stdlib.h>
-#define SIZE 7
+#define SIZE_LIMIT 7
 
 typedef struct block {
     int no;
@@ -13,20 +14,22 @@ typedef struct block {
 }
 Block;
 
-void display(Block arr[]) {
+void display(Block arr[],int size) {
     int i;
     printf("\nNo   Profit \t Weight    Profit_per_Unit\n");
-    for (i = 0; i < SIZE; i++) {
-        printf(" %d    %.2f \t %.2f \t\t %.2f\n", arr[i].no, arr[i].profit, arr[i].weight, arr[i].profit_per_unit);
+    for (i = 0; i < size; i++) {
+        printf(" %d    %.2f \t %.2f \t\t %.2f\n", arr[i].no, arr[i].profit,
+                    arr[i].weight, arr[i].profit_per_unit);
     }
 }
 
 int main() {
-    Block arr[SIZE], temp;
-    int i, j;
+    Block arr[SIZE_LIMIT], temp;
+    int i, j,size;
     float capacity, avalible, total_profit = 0;
-    printf("Here Total number of Blocks is %d \n", SIZE);
-    for (i = 0; i < SIZE; i++) {
+    printf("Enter total number of Blocks(maximum: %d): \n", SIZE_LIMIT);
+    scanf("%d",&size);
+    for (i = 0; i < size; i++) {  //taking input data
         arr[i].no = i;
         printf("Enter Weight value of Block %d: ", i);
         scanf("%f", &arr[i].weight);
@@ -39,8 +42,8 @@ int main() {
     scanf("%f", &capacity);
     avalible = capacity;
 
-    for (i = 0; i < SIZE - 1; i++) {
-        for (j = 0; j < SIZE - 1 - i; j++) {
+    for (i = 0; i < size - 1; i++) {  // Sorting blocks based on profit per unit
+        for (j = 0; j < size - 1 - i; j++) {
             if (arr[j].profit_per_unit < arr[j + 1].profit_per_unit) {
                 temp = arr[j];
                 arr[j] = arr[j + 1];
@@ -49,19 +52,25 @@ int main() {
         }
     }
     printf("\nBlocks Data after sorting based on profit per unit");
-    display(arr);
+    display(arr,size);
 
-    for (i = 0; i < SIZE; i++) {
-        if (avalible >= arr[i].weight) {
-            printf("\nIteration %d: Choose Block %d, take full part here profit per unit= %.2f", i, arr[i].no, arr[i].profit_per_unit);
+    for (i = 0; i < size; i++) {
+        if (avalible >= arr[i].weight) {  // when enough space avalible take a full block 
+            printf("\nIteration %d: Choose Block %d, take full part here profit per unit= %.2f", i,
+                        arr[i].no, arr[i].profit_per_unit);
+            
             total_profit += arr[i].profit;
             avalible -= arr[i].weight;
+            
             printf("\n\t Now profit = %.2f and Remaining Capacity = %.2f", total_profit, avalible);
         }
-        else {
-            printf("\nIteration %d: Choose Block %d, take %.2f part here profit per unit= %.2f", i, arr[i].no, avalible / arr[i].weight, arr[i].profit_per_unit);
+        else {   // when enough spacce not avalible take a block by parttiion
+            printf("\nIteration %d: Choose Block %d, take %.2f part here profit per unit= %.2f", i,
+                        arr[i].no, avalible / arr[i].weight, arr[i].profit_per_unit);
+            
             total_profit += avalible * arr[i].profit_per_unit;
             avalible = 0;
+            
             printf("\n\t Now profit = %.2f and Remaining Capacity = %.2f", total_profit, avalible);
             break;
         }
@@ -73,9 +82,7 @@ int main() {
 }
 
 /*
-OUTPUT :-
-
-Here Total number of Blocks is 7 
+Enter total number of Blocks(maximum: 7): 7
 Enter Weight value of Block 0: 2
 Enter Profit value of Block 0: 10
 Enter Weight value of Block 1: 3
@@ -84,7 +91,7 @@ Enter Weight value of Block 2: 5
 Enter Profit value of Block 2: 15
 Enter Weight value of Block 3: 7
 Enter Profit value of Block 3: 7
-Enter Weight value of Block 4: 1
+Enter Weight value of Block 4: 1 
 Enter Profit value of Block 4: 6
 Enter Weight value of Block 5: 4
 Enter Profit value of Block 5: 18
