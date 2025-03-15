@@ -1,7 +1,9 @@
 # Greedy Algorithm
-*    ## Fractional Knapsack Problem &emsp; [method 1](#method-1) &emsp; [method 2](#method-2)
+*    ### Fractional Knapsack Problem &emsp; &emsp;&emsp; &emsp; &emsp;[method 1](#fractional-knapsack-problem-method-1) &emsp; [method 2](#fractional-knapsack-problem-method-2)
+*    ### Job Scheduling with Deadline Problem &emsp; [method 1](#job-scheduling-with-deadline-problem-method-1) &emsp; [method 2](#job-scheduling-with-deadline-problem-method-2)
+<br>  
 
-### Method 1
+### Fractional Knapsack Problem Method 1
 ```C
 /* write a C program to implement Fractional Knapsack problem using Greedy approach */
 /*Last updated : 15-03-2025*/
@@ -130,7 +132,7 @@ For Capacity 15.00, Total Profit will be 55.33
 
 */
 ```
-### Method 2
+### Fractional Knapsack Problem Method 2
 
 ```C
 /* write a C program to implement Fractional Knapsack problem using Greedy approach */
@@ -254,3 +256,134 @@ For Capacity 15.00, Total Profit will be 55.33
 
 */
 ```
+## Job Scheduling with Deadline Problem method 1
+```C
+/* write a C program to implement Job Scheduling with Deadline problem using Greedy approach */
+/*Last updated : 15-03-2025*/
+
+#include <stdio.h>
+#include <stdlib.h>
+#define SIZE_LIMIT 7
+
+typedef struct job {
+    int no;
+    float profit;
+    int deadline;
+} Job;
+
+void display(Job arr[], int size) {
+    int i;
+    printf("\nNo   Profit \t Deadline\n");
+    for (i = 0; i < size; i++) {
+        printf(" %d    %.2f  \t\t %d\n", arr[i].no, arr[i].profit, arr[i].deadline);
+    }
+}
+
+int main() {
+    Job arr[SIZE_LIMIT], temp;
+    int i, j, size, slot_seq[SIZE_LIMIT], time_limit, time_slot, c;
+    float total_profit = 0;
+    printf("Enter total number of Job(maximum: %d): ", SIZE_LIMIT);
+    scanf("%d", &size);
+    for (i = 0; i < size; i++) { //taking input data
+        arr[i].no = i;
+        printf("Enter Profit value of job %d  : ", i);
+        scanf("%f", &arr[i].profit);
+        printf("Enter Deadline value of job %d: ", i);
+        scanf("%d", &arr[i].deadline);
+        slot_seq[i] = -1;
+    }
+
+    printf("\nEnter Maximum Deadline Value: ");
+    scanf("%d", &time_limit);
+
+    for (i = 0; i < size - 1; i++) { // Sorting blocks based on profit per unit
+        for (j = 0; j < size - 1 - i; j++) {
+            if (arr[j].profit < arr[j + 1].profit) {
+                temp = arr[j];
+                arr[j] = arr[j + 1];
+                arr[j + 1] = temp;
+            }
+        }
+    }
+    printf("\nJobs Data after sorting based on profit");
+    display(arr, size);
+
+    for (i = 0; i < size; i++) {
+        if (arr[i].deadline > time_limit) {
+            time_slot = time_limit - 1;
+        }
+        else {
+            time_slot = arr[i].deadline - 1;
+        }
+        /* find a free slot starting from the last of the job's deadline to the beginning of timeline */
+        while (time_slot >= 0 && slot_seq[time_slot] != -1) {
+            time_slot--;
+        }
+        /* if a free slot is found, insert the job to the slot array at time_slot index
+        else the job is not added to the schedule */
+        if (time_slot >= 0 && slot_seq[time_slot] == -1) {
+            slot_seq[time_slot] = arr[i].no;
+            total_profit += arr[i].profit;
+            printf("\nChoose job:%d, place at index:%d after Iteration:%d: Profit will be = %.2f", arr[i].no, time_slot, i, total_profit);
+        }
+        else {
+            printf("\nChoose job:%d, possible slot not Avalible, Job discarded ",arr[i].no);
+        }
+        printf("\nCurrent Job Sequence no: ");
+        for (j = 0; j < time_limit; j++) {
+            printf("%d ", slot_seq[j]);
+        }
+    }
+    c = 0;
+    /* check whether a intermediate Slot is unallocated or not 
+       if found fill this slot with next allocated job slot*/
+    for (i = 0; i < time_limit; i++) {
+        if (slot_seq[i] == -1) { // 
+            printf("\ni=%d time_limit=%d", i, time_limit);
+            c++;
+            slot_seq[i] = slot_seq[i + c];
+        }
+    }
+    printf("\nFinal profit=%.2f for Slot order Sequence: ", total_profit);
+    for (j = 0; j < time_limit; j++) {
+        printf("job:%d  ", slot_seq[j]);
+    }
+
+    return 0;
+}
+
+/*
+Enter total number of Job(maximum: 7): 4
+Enter Profit value of job 0  : 20
+Enter Deadline value of job 0: 4
+Enter Profit value of job 1  : 25
+Enter Deadline value of job 1: 1
+Enter Profit value of job 2  : 30
+Enter Deadline value of job 2: 2
+Enter Profit value of job 3  : 40
+Enter Deadline value of job 3: 2
+
+Enter Maximum Deadline Value: 3
+
+Jobs Data after sorting based on profit
+No   Profit      Deadline
+ 3    40.00              2
+ 2    30.00              2
+ 1    25.00              1
+ 0    20.00              4
+
+Choose job:3, place at index:1 after Iteration:0: Profit will be = 40.00
+Current Job Sequence no: -1 3 -1 
+Choose job:2, place at index:0 after Iteration:1: Profit will be = 70.00
+Current Job Sequence no: 2 3 -1 
+Choose job:1, possible slot not Avalible, Job discarded 
+Current Job Sequence no: 2 3 -1 
+Choose job:0, place at index:2 after Iteration:3: Profit will be = 90.00
+Current Job Sequence no: 2 3 0 
+Final profit=90.00 for Slot order Sequence: job:2  job:3  job:0  
+
+*/
+```
+
+### Job Scheduling with Deadline Problem method 2
