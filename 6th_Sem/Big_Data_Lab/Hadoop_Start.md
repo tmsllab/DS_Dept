@@ -37,3 +37,9 @@ localhost:9870
 Now choose the Utilities tab select the 1st option(Browse the file system)
 
 when you update something on Hadoop it will shown here.
+
+
+## To stop Hadoop System
+```
+stop-all.sh
+```
