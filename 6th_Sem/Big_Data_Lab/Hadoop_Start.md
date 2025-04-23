@@ -5,7 +5,7 @@ cd hadoop-3.4.1/etc/hadoop/
 ```
 
 ```BASH
-ssh localhost 
+ssh localhost
 ```
 
 ```BASH
@@ -28,4 +28,8 @@ export PDSH_RCMD_TYPE=ssh
 ```BASH
 start-all.sh
 
+```
+Copy the bellow url and paste default browser(Firefox here)
+```BASH
+localhost:9870
 ```
