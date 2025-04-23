@@ -33,3 +33,7 @@ Copy the bellow url and paste default browser(Firefox here)
 ```BASH
 localhost:9870
 ```
+
+Now choose the Utilities tab select the 1st option(Browse the file system)
+
+when you update something on Hadoop it will shown here.
