@@ -1,7 +1,7 @@
 # Start hadoop
 
 ```BASH
-
+cd hadoop-3.4.1/etc/hadoop/
 ```
 
 ```BASH
